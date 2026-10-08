@@ -1,0 +1,120 @@
+
+@import "tailwindcss";
+
+/* Comfortaa */
+@font-face {
+  font-family: "Comfortaa";
+  src: url("./assets/fonts/comfortaa/Comfortaa-Light.woff2")
+    format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Comfortaa";
+  src: url("./assets/fonts/comfortaa/Comfortaa-Regular.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Comfortaa";
+  src: url("./assets/fonts/comfortaa/Comfortaa-Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Frank Ruhl Libre */
+@font-face {
+  font-family: "Frank Ruhl Libre";
+  src: url("./assets/fonts/FrankRuhl/FrankRuhlLibre-Light.woff2")
+    format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Frank Ruhl Libre";
+  src: url("./assets/fonts/FrankRuhl/FrankRuhlLibre-Regular.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Frank Ruhl Libre";
+  src: url("./assets/fonts/FrankRuhl/FrankRuhlLibre-Medium.woff2")
+    format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Frank Ruhl Libre";
+  src: url("./assets/fonts/FrankRuhl/FrankRuhlLibre-Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --color-darkwood: #453228;
+  --color-walnut: #664839;
+  --color-parchment: #E5D4C4;
+  --color-mintcream: #EEF3DA;
+  --color-lime: #DCEB86;
+  --color-ink: #2C3031;
+
+  --font-heading: "Frank Ruhl Libre", serif;
+  --font-ui: "Comfortaa", sans-serif;
+}
+
+:root {
+  font-family: var(--font-ui);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-darkwood);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-lime);
+  outline-offset: 4px;
+}
+
+::selection {
+  background: var(--color-lime);
+  color: var(--color-darkwood);
+}
