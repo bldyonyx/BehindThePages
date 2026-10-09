@@ -1,16 +1,72 @@
-# React + Vite
+# Behind the Pages ♡
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+> a little look behind Dear Pages.  
+> ₊˚⊹♡ from the first idea to the final app ♡⊹˚₊
 
-Currently, two official plugins are available:
+Behind the Pages is an interactive presentation created to share the design and development journey of [Dear Pages](https://github.com/bldyonyx/DearPages), my cozy book tracking web app. (˶ᵔ ᵕ ᵔ˶)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+A little space to explore the planning, design, code, and challenges behind the project.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✦ What's inside
 
-## Expanding the Oxlint configuration
+♡ 15 slides covering the journey from concept to development
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+♡ Interactive user flow and machine flow diagrams
+
+♡ Wireframes and mockups from the design process
+
+♡ An expandable Firebase database structure
+
+♡ An overview of the React architecture, JavaScript logic, and external APIs
+
+♡ A look at testing, deployment, and development challenges
+
+♡ Direct links to Dear Pages, its documentation, and GitHub repository
+
+---
+
+## ✦ Little interactions
+
+♡ Navigate between slides using buttons or arrow keys
+
+♡ Browse diagrams and design files through interactive folders
+
+♡ Zoom, drag, and switch between images
+
+♡ Explore a simplified Firebase Realtime Database structure
+
+---
+
+## ✦ Made with
+
+`React` · `JavaScript` · `Tailwind CSS` · `Vite`
+
+### little helpers ♡
+
+⌁ **Lucide React** — interface icons
+
+---
+
+## ✦ About the project
+
+Behind the Pages was created as a presentation companion for my final project.
+
+Rather than using traditional slides alone, I wanted to build a small interactive experience that reflects the visual identity of Dear Pages while making it easier to explore the different stages of development.
+
+The presentation is written in French and includes visual examples from the project.
+
+---
+
+## ✦ Explore Dear Pages
+
+[Live app](https://dear-pages-booktracker.web.app) · [Documentation](https://dear-pages-docs.web.app) · [GitHub repository](https://github.com/bldyonyx/DearPages)
+
+---
+
+<p align="center">
+  every page has a story behind it ♡
+  <br>
+  (˶ᵔ ᵕ ᵔ˶)
+</p>
