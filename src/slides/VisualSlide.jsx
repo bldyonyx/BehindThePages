@@ -6,6 +6,8 @@ import {
   Database,
 } from "lucide-react";
 
+import DiagramExplorer from "../components/DiagramExplorer";
+
 const firebaseData = {
   users: {
     userId: {
@@ -39,8 +41,7 @@ const firebaseData = {
           isbn: "2234099617",
           publishedDate: "2025-04-30",
           status: "reading",
-          title:
-            "Moi qui n'ai pas connu les hommes",
+          title: "Moi qui n'ai pas connu les hommes",
           updatedAt: 1791413584142,
         },
       },
@@ -233,6 +234,7 @@ function FirebaseTree() {
 
 function VisualSlide({ slide }) {
   const isDataModel = slide.id === "data-model";
+  const isProcess = slide.id === "process";
 
   return (
     <div className="space-y-4 sm:space-y-5">
@@ -259,6 +261,8 @@ function VisualSlide({ slide }) {
       >
         {isDataModel ? (
           <FirebaseTree />
+        ) : isProcess ? (
+          <DiagramExplorer />
         ) : slide.image ? (
           <div className="flex w-full items-center justify-center rounded-2xl bg-parchment p-3 sm:p-5">
             <img
