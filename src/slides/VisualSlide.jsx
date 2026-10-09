@@ -156,7 +156,7 @@ function FirebaseNode({
           className="flex min-h-8 items-center gap-2 px-2 py-1"
           style={{ marginLeft: depth * 18 }}
         >
-          <span className="w-[15px] shrink-0" />
+          <span className="w-3.75 shrink-0" />
 
           <span className="font-mono text-xs text-parchment/80 sm:text-sm">
             {name}:
@@ -235,6 +235,7 @@ function FirebaseTree() {
 function VisualSlide({ slide }) {
   const isDataModel = slide.id === "data-model";
   const isProcess = slide.id === "process";
+  const isDesign = slide.id === "design";
 
   return (
     <div className="space-y-4 sm:space-y-5">
@@ -255,14 +256,16 @@ function VisualSlide({ slide }) {
       <div
         className={`flex items-center justify-center rounded-3xl border border-parchment/20 bg-walnut/55 p-3 sm:p-5 ${
           isDataModel
-            ? "min-h-[360px]"
+            ? "min-h-90"
             : "min-h-64 sm:min-h-80"
         }`}
       >
         {isDataModel ? (
           <FirebaseTree />
         ) : isProcess ? (
-          <DiagramExplorer />
+          <DiagramExplorer mode="process" />
+        ) : isDesign ? (
+          <DiagramExplorer mode="design" />
         ) : slide.image ? (
           <div className="flex w-full items-center justify-center rounded-2xl bg-parchment p-3 sm:p-5">
             <img

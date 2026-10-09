@@ -1,7 +1,8 @@
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ChevronDown,
+  ChevronLeft,
   ChevronRight,
   Folder,
   FolderOpen,
@@ -15,24 +16,27 @@ import {
 
 const userFlowImages = import.meta.glob(
   "../assets/screenshots/userflow/*.{png,jpg,jpeg,webp}",
-  {
-    eager: true,
-    query: "?url",
-    import: "default",
-  },
+  { eager: true, query: "?url", import: "default" },
 );
 
 const machineFlowImages = import.meta.glob(
   "../assets/screenshots/machineflow/*.{png,jpg,jpeg,webp}",
-  {
-    eager: true,
-    query: "?url",
-    import: "default",
-  },
+  { eager: true, query: "?url", import: "default" },
 );
 
-const diagramNames = {
+const wireframeImages = import.meta.glob(
+  "../assets/diagrams/wireframes/*.{png,jpg,jpeg,webp}",
+  { eager: true, query: "?url", import: "default" },
+);
+
+const mockupImages = import.meta.glob(
+  "../assets/diagrams/mockups/*.{png,jpg,jpeg,webp}",
+  { eager: true, query: "?url", import: "default" },
+);
+
+const imageNames = {
   userflow3: "Parcours utilisateur global",
+
   machinefllowauth: "Authentification",
   machineflowauth: "Authentification",
   machineflowaddabook: "Ajout d'un livre",
@@ -43,55 +47,127 @@ const diagramNames = {
   machineflowreview: "Avis et notes",
   machineflowsettings: "Paramètres",
   machineflowstatus: "Statuts de lecture",
+
+  wireframelogin: "Connexion",
+  wireframesignup: "Inscription",
+  wireframeonboarding: "Onboarding",
+  wireframedashboard: "Dashboard",
+  wireframediscover: "Découvrir",
+  wireframebookpage: "Fiche livre",
+  wireframeaddbooksmodal: "Ajout d'un livre",
+  wireframelibrary: "Ma bibliothèque",
+  wireframeemptylibrary: "Bibliothèque vide",
+  wireframecollections: "Collections",
+  wireframecollectionpage: "Détail d'une collection",
+  wireframeemptycollection: "Collection vide",
+  wireframecreatecollectionmodal: "Créer une collection",
+  wireframemodifiercollectionmodal: "Modifier une collection",
+  wireframedeletecollectionmodal: "Supprimer une collection",
+  wireframesettings: "Paramètres",
+  wireframedeleteaccountmodal: "Supprimer le compte",
+  wireframeloadingstate: "État de chargement",
+  wireframeerrorstate: "État d'erreur",
+  wireframenosearchresults: "Aucun résultat de recherche",
+
+  mockupdashboard: "Dashboard",
+  mockupdiscover: "Découvrir",
+  mockupbookpage: "Fiche livre",
+  mockupsettings: "Paramètres",
 };
 
-function formatName(path) {
-  const filename = path.split("/").pop();
-  const rawName = filename.replace(/\.[^.]+$/, "");
+const wireframeOrder = [
+  "wireframelogin",
+  "wireframesignup",
+  "wireframeonboarding",
+  "wireframedashboard",
+  "wireframediscover",
+  "wireframebookpage",
+  "wireframeaddbooksmodal",
+  "wireframelibrary",
+  "wireframeemptylibrary",
+  "wireframecollections",
+  "wireframecollectionpage",
+  "wireframeemptycollection",
+  "wireframecreatecollectionmodal",
+  "wireframemodifiercollectionmodal",
+  "wireframedeletecollectionmodal",
+  "wireframesettings",
+  "wireframedeleteaccountmodal",
+  "wireframeloadingstate",
+  "wireframeerrorstate",
+  "wireframenosearchresults",
+];
 
-  const normalizedName = rawName
+const mockupOrder = [
+  "mockupdashboard",
+  "mockupdiscover",
+  "mockupbookpage",
+  "mockupsettings",
+];
+
+function getFileKey(path) {
+  return path
+    .split("/")
+    .pop()
+    .replace(/\.[^.]+$/, "")
     .toLowerCase()
     .replace(/[^a-z0-9]/g, "");
+}
 
-  if (diagramNames[normalizedName]) {
-    return diagramNames[normalizedName];
+function formatName(path) {
+  const key = getFileKey(path);
+
+  if (imageNames[key]) {
+    return imageNames[key];
   }
 
-  if (normalizedName.includes("add") &&
-      normalizedName.includes("book")) {
+  if (key.includes("add") && key.includes("book")) {
     return "Ajout d'un livre";
   }
 
-  if (normalizedName.includes("discover")) {
+  if (key.includes("discover")) {
     return "Recherche et découverte";
   }
 
-  if (normalizedName.includes("userflow")) {
+  if (key.includes("userflow")) {
     return "Parcours utilisateur global";
   }
 
-  return rawName
+  return path
+    .split("/")
+    .pop()
+    .replace(/\.[^.]+$/, "")
     .replace(/([a-z])([A-Z])/g, "$1 $2")
     .replace(/[-_]/g, " ")
-    .replace(/\s+/g, " ")
     .trim();
 }
 
-function createImageList(images) {
+function createImageList(images, order = []) {
   return Object.entries(images)
     .map(([path, src]) => ({
       id: path,
+      key: getFileKey(path),
       name: formatName(path),
       src,
     }))
-    .sort((a, b) =>
-      a.name.localeCompare(b.name, "fr", {
+    .sort((a, b) => {
+      const aIndex = order.indexOf(a.key);
+      const bIndex = order.indexOf(b.key);
+
+      if (aIndex !== -1 && bIndex !== -1) {
+        return aIndex - bIndex;
+      }
+
+      if (aIndex !== -1) return -1;
+      if (bIndex !== -1) return 1;
+
+      return a.name.localeCompare(b.name, "fr", {
         numeric: true,
-      }),
-    );
+      });
+    });
 }
 
-const folders = [
+const processFolders = [
   {
     id: "userflow",
     name: "User flows",
@@ -106,11 +182,33 @@ const folders = [
   },
 ];
 
+const designFolders = [
+  {
+    id: "wireframes",
+    name: "Wireframes",
+    description: "Structure et organisation des écrans",
+    images: createImageList(wireframeImages, wireframeOrder),
+  },
+  {
+    id: "mockups",
+    name: "Mockups",
+    description: "Maquettes et direction visuelle",
+    images: createImageList(mockupImages, mockupOrder),
+  },
+];
+
 const MIN_ZOOM = 0.5;
 const MAX_ZOOM = 5;
 const ZOOM_STEP = 0.25;
 
-function DiagramViewer({ image, onClose }) {
+function DiagramViewer({
+  images,
+  initialIndex,
+  onClose,
+}) {
+  const [currentIndex, setCurrentIndex] =
+    useState(initialIndex);
+
   const [zoom, setZoom] = useState(1);
   const [position, setPosition] = useState({
     x: 0,
@@ -119,22 +217,67 @@ function DiagramViewer({ image, onClose }) {
 
   const dragging = useRef(null);
 
+  const image = images[currentIndex];
+
+  const resetView = useCallback(() => {
+    dragging.current = null;
+    setZoom(1);
+    setPosition({ x: 0, y: 0 });
+  }, []);
+
+  const goToImage = useCallback(
+    (direction) => {
+      setCurrentIndex((previous) =>
+        (previous + direction + images.length) %
+        images.length,
+      );
+
+      resetView();
+    },
+    [images.length, resetView],
+  );
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopImmediatePropagation();
         onClose();
+      }
+
+      if (
+        event.key === "ArrowRight" &&
+        images.length > 1
+      ) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        goToImage(1);
+      }
+
+      if (
+        event.key === "ArrowLeft" &&
+        images.length > 1
+      ) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        goToImage(-1);
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener(
+      "keydown",
+      handleKeyDown,
+      true,
+    );
 
     return () => {
       window.removeEventListener(
         "keydown",
         handleKeyDown,
+        true,
       );
     };
-  }, [onClose]);
+  }, [goToImage, images.length, onClose]);
 
   useEffect(() => {
     const previousOverflow =
@@ -147,11 +290,6 @@ function DiagramViewer({ image, onClose }) {
         previousOverflow;
     };
   }, []);
-
-  const resetView = () => {
-    setZoom(1);
-    setPosition({ x: 0, y: 0 });
-  };
 
   const changeZoom = (amount) => {
     setZoom((previous) =>
@@ -208,7 +346,7 @@ function DiagramViewer({ image, onClose }) {
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`Diagramme : ${image.name}`}
+      aria-label={`Image : ${image.name}`}
       className="fixed inset-0 z-50 flex flex-col bg-[#171311]/98 text-parchment"
     >
       <div className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-b border-parchment/15 bg-darkwood px-4 py-3 sm:px-7">
@@ -218,12 +356,42 @@ function DiagramViewer({ image, onClose }) {
             className="shrink-0 text-lime"
           />
 
-          <p className="truncate text-xs font-bold sm:text-sm">
-            {image.name}
-          </p>
+          <div className="min-w-0">
+            <p className="truncate text-xs font-bold sm:text-sm">
+              {image.name}
+            </p>
+
+            <p className="text-[11px] text-parchment/50">
+              {currentIndex + 1} / {images.length}
+            </p>
+          </div>
         </div>
 
         <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => goToImage(-1)}
+            disabled={images.length < 2}
+            aria-label="Image précédente"
+            title="Image précédente"
+            className="rounded-lg border border-parchment/20 p-2 hover:bg-parchment/10 disabled:opacity-30"
+          >
+            <ChevronLeft size={18} />
+          </button>
+
+          <button
+            type="button"
+            onClick={() => goToImage(1)}
+            disabled={images.length < 2}
+            aria-label="Image suivante"
+            title="Image suivante"
+            className="rounded-lg border border-parchment/20 p-2 hover:bg-parchment/10 disabled:opacity-30"
+          >
+            <ChevronRight size={18} />
+          </button>
+
+          <div className="mx-1 h-6 w-px bg-parchment/20" />
+
           <button
             type="button"
             onClick={() => changeZoom(-ZOOM_STEP)}
@@ -261,7 +429,7 @@ function DiagramViewer({ image, onClose }) {
           <button
             type="button"
             onClick={onClose}
-            aria-label="Fermer le diagramme"
+            aria-label="Fermer l'image"
             className="rounded-lg border border-parchment/20 p-2 hover:bg-parchment/10"
           >
             <X size={19} />
@@ -286,6 +454,7 @@ function DiagramViewer({ image, onClose }) {
           }}
         >
           <img
+            key={image.id}
             src={image.src}
             alt={image.name}
             draggable={false}
@@ -295,8 +464,8 @@ function DiagramViewer({ image, onClose }) {
       </div>
 
       <p className="shrink-0 border-t border-parchment/15 bg-darkwood px-4 py-3 text-center text-[11px] text-parchment/55 sm:text-xs">
-        Molette pour zoomer · Glisser pour déplacer ·
-        Échap pour fermer
+        ← → pour naviguer · Molette pour zoomer ·
+        Glisser pour déplacer · Échap pour fermer
       </p>
     </div>
   );
@@ -344,11 +513,13 @@ function DiagramFolder({ folder, onOpenImage }) {
 
       {isOpen && (
         <div className="grid gap-2 border-t border-parchment/15 p-3 sm:p-4">
-          {folder.images.map((image) => (
+          {folder.images.map((image, index) => (
             <button
               key={image.id}
               type="button"
-              onClick={() => onOpenImage(image)}
+              onClick={() =>
+                onOpenImage(folder.images, index)
+              }
               className="group flex min-h-12 items-center gap-3 rounded-xl border border-parchment/10 bg-walnut/45 px-4 py-3 text-left transition-colors hover:border-lime/50 hover:bg-walnut"
             >
               <ImageIcon
@@ -369,7 +540,7 @@ function DiagramFolder({ folder, onOpenImage }) {
 
           {folder.images.length === 0 && (
             <p className="py-5 text-center text-xs text-parchment/50">
-              Aucun diagramme trouvé dans ce dossier.
+              Aucune image trouvée dans ce dossier.
             </p>
           )}
         </div>
@@ -378,9 +549,18 @@ function DiagramFolder({ folder, onOpenImage }) {
   );
 }
 
-function DiagramExplorer() {
-  const [selectedImage, setSelectedImage] =
-    useState(null);
+function DiagramExplorer({ mode = "process" }) {
+  const [viewer, setViewer] = useState(null);
+
+  const folders =
+    mode === "design" ? designFolders : processFolders;
+
+  const openImage = (images, index) => {
+    setViewer({
+      images,
+      index,
+    });
+  };
 
   return (
     <>
@@ -390,22 +570,22 @@ function DiagramExplorer() {
             <DiagramFolder
               key={folder.id}
               folder={folder}
-              onOpenImage={setSelectedImage}
+              onOpenImage={openImage}
             />
           ))}
         </div>
 
         <p className="text-center text-xs text-parchment/50">
-          Sélectionner un dossier, puis un diagramme
+          Sélectionner un dossier, puis une image
           pour l'agrandir.
         </p>
       </div>
 
-      {selectedImage && (
+      {viewer && (
         <DiagramViewer
-          key={selectedImage.id}
-          image={selectedImage}
-          onClose={() => setSelectedImage(null)}
+          images={viewer.images}
+          initialIndex={viewer.index}
+          onClose={() => setViewer(null)}
         />
       )}
     </>
