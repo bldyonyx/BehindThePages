@@ -24,14 +24,24 @@ const firebaseData = {
         ],
         language: "fr",
         onboardingCompleted: true,
+        updatedAt: 1791515792289,
       },
       library: {
         bookId: {
-          title: "Crime et Châtiment",
-          authors: ["Fiodor Dostoïevski"],
-          status: "to-read",
-          isbn: "2322224081",
-          addedAt: 1790253992666,
+          addedAt: 1790253892084,
+          authors: ["Jacqueline Harpman"],
+          categories: [
+            "Fiction / Literary",
+            "Fiction / General",
+          ],
+          cover: "https://books.google.com/...",
+          googleBooksId: "exampleBookId",
+          isbn: "2234099617",
+          publishedDate: "2025-04-30",
+          status: "reading",
+          title:
+            "Moi qui n'ai pas connu les hommes",
+          updatedAt: 1791413584142,
         },
       },
       collections: {
