@@ -1,5 +1,5 @@
 
-import { BookOpen } from "lucide-react";
+import { BookOpen, ExternalLink } from "lucide-react";
 
 import { presentationData } from "../data/presentationData";
 import useSlideNavigation from "../hooks/useSlideNavigation";
@@ -32,17 +32,31 @@ function Presentation() {
   return (
     <main className="flex min-h-screen flex-col bg-darkwood px-6 py-6 font-ui text-parchment sm:px-12 sm:py-8">
       <header className="flex items-center justify-between gap-4 border-b border-parchment/15 pb-5">
-        <div className="flex items-center gap-3 text-[#EEF3E4]">
+        <a
+          href="https://dear-pages-booktracker.web.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Ouvrir Dear Pages dans un nouvel onglet"
+          title="Ouvrir Dear Pages"
+          className="group flex items-center gap-3 text-[#EEF3E4] transition-colors hover:text-lime focus-visible:rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime"
+        >
           <BookOpen
             aria-hidden="true"
-            className="size-6 shrink-0 text-[#CDADAC]"
+            className="size-6 shrink-0 text-[#CDADAC] transition-colors group-hover:text-lime"
             strokeWidth={1.8}
           />
 
           <span className="whitespace-nowrap font-heading text-[28px] font-semibold leading-none tracking-[0.01em]">
             Dear Pages
           </span>
-        </div>
+
+          <ExternalLink
+            aria-hidden="true"
+            size={15}
+            className="ml-1 shrink-0 text-parchment/50 opacity-0 transition-all duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
+            strokeWidth={1.8}
+          />
+        </a>
 
         <span className="hidden text-xs text-parchment/60 sm:block">
           Behind the Pages — Dans les coulisses
