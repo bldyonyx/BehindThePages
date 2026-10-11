@@ -194,13 +194,13 @@ export const presentationData = [
     title: "Tests & déploiement",
     subtitle: "Vérifier et publier l'application",
     points: [
-      "Vitest : 246 tests réussis dans 28 fichiers au 9 octobre 2026",
-      "React Testing Library et tests manuels",
-      "Oxlint et build Vite : vérification du projet",
+      "Vitest : 262 tests réussis dans 28 fichiers au 11 octobre 2026",
+      "0 test échoué et aucun warning React act(...) dans la dernière exécution",
+      "Oxlint réussi (warnings préexistants) et build Vite réussi",
       "GitHub Actions et Firebase Hosting : déploiement automatisé",
     ],
     presenterNote:
-      "Montrer les résultats Vitest, un fichier de test, une exécution GitHub Actions réussie et le site publié.",
+      "Montrer les résultats Vitest à jour, le lint, le build Vite, une exécution GitHub Actions réussie et le site publié.",
     criteria: ["08"],
   },
   {
