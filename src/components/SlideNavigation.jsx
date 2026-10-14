@@ -100,7 +100,7 @@ function SlideNavigation({
           <div
             role="group"
             aria-label="Liste des slides"
-            className="absolute bottom-full left-1/2 z-40 mb-3 max-h-[min(65vh,480px)] w-[min(320px,90vw)] -translate-x-1/2 overflow-y-auto rounded-2xl border border-parchment/20 bg-darkwood p-2 shadow-2xl [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="absolute bottom-full left-1/2 z-40 mb-3 max-h-[min(65vh,480px)] w-[min(320px,90vw)] -translate-x-1/2 overflow-y-auto rounded-2xl border border-parchment/20 bg-darkwood p-2 shadow-2xl scrollbar-none [&::-webkit-scrollbar]:hidden"
           >
             <div className="border-b border-parchment/15 px-3 py-3">
               <p className="text-xs font-bold uppercase tracking-[0.15em] text-lime">

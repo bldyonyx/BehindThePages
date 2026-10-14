@@ -11,7 +11,7 @@ export const presentationData = [
     description:
       "Conception et développement d'une application web de suivi de lecture.",
     presenterNote:
-      "Présenter Dear Pages et expliquer que Behind the Pages est le support interactif de l'oral.",
+      "Présenter Dear Pages et ce support de l'oral.",
     criteria: [],
   },
   {
@@ -29,7 +29,7 @@ export const presentationData = [
       "Proposer une expérience simple et chaleureuse",
     ],
     presenterNote:
-      "Expliquer la motivation personnelle, les fonctionnalités principales et l'objectif du projet.",
+      "Relier la passion de la lecture au besoin de centraliser et suivre ses livres.",
     criteria: ["01", "09"],
   },
   {
@@ -44,7 +44,7 @@ export const presentationData = [
       "Anticiper les parcours utilisateur et les traitements techniques.",
     image: null,
     presenterNote:
-      "Montrer le user flow global, puis le machine flow d'ajout d'un livre : demande, enregistrement Firebase, succès ou erreur.",
+      "Situer l'ajout d'un livre dans le user flow ; montrer son machine flow : Firebase, succès ou erreur.",
     criteria: ["01"],
   },
   {
@@ -59,7 +59,7 @@ export const presentationData = [
       "Chaque utilisateur possède son profil, ses préférences, sa bibliothèque et ses collections.",
     image: null,
     presenterNote:
-      "Déplier les quatre catégories principales, puis un livre pour montrer ses informations.",
+      "Nommer profil, préférences, bibliothèque et collections ; déplier un seul livre.",
     criteria: ["01", "03", "07"],
   },
   {
@@ -74,7 +74,7 @@ export const presentationData = [
       "Wireframes Figma, maquettes et évolution progressive de l'interface.",
     image: null,
     presenterNote:
-      "Montrer les wireframes, la première maquette du dashboard, puis Discover, Book Page et Settings. Terminer par l'interface finale.",
+      "Illustrer le dashboard : wireframe, maquette, puis interface finale lors de la démo.",
     criteria: ["02"],
   },
   {
@@ -92,7 +92,7 @@ export const presentationData = [
       "services/books : recherche, sources et traitement des données",
     ],
     presenterNote:
-      "VS Code : ouvrir src, montrer pages, components, hooks et services. Pointer useLibraryBooks.js, libraryService.js et les modules services/books.",
+      "Résumer les responsabilités affichées ; illustrer la séparation hook/service avec useLibraryBooks.js.",
     criteria: ["03", "04"],
   },
   {
@@ -110,7 +110,7 @@ export const presentationData = [
       "Utiliser l'IA comme aide, puis vérifier les propositions",
     ],
     presenterNote:
-      "GitHub : montrer rapidement l'historique des commits et éventuellement le README.",
+      "Montrer l'historique GitHub : progression, corrections et vérification des propositions de l'IA.",
     criteria: ["04"],
   },
   {
@@ -128,7 +128,7 @@ export const presentationData = [
       "finishedAt : enregistrer la date de fin de lecture",
     ],
     presenterNote:
-      "VS Code : ouvrir src/services/libraryService.js et montrer updateBookStatus, ses paramètres, ses conditions et finishedAt.",
+      "Dans libraryService.js, expliquer updateBookStatus : paramètres, conditions, async/await et finishedAt.",
     criteria: ["05"],
   },
   {
@@ -146,7 +146,7 @@ export const presentationData = [
       "AuthContext et React Router : connexion et navigation",
     ],
     presenterNote:
-      "VS Code : ouvrir src/hooks/useLibraryBooks.js, montrer les trois états et useEffect, puis les routes dans App.jsx.",
+      "Dans useLibraryBooks.js, montrer les états et useEffect ; citer AuthContext et React Router.",
     criteria: ["05"],
   },
   {
@@ -164,7 +164,7 @@ export const presentationData = [
       "i18next : interface disponible en français et en anglais",
     ],
     presenterNote:
-      "Montrer services/books et éventuellement formatBook. Bien distinguer langue de l'interface, langue des livres et traduction des descriptions.",
+      "Prendre un résultat de recherche normalisé ; distinguer langue de l'interface, du livre et traduction du résumé.",
     criteria: ["06", "07"],
   },
   {
@@ -182,7 +182,7 @@ export const presentationData = [
       "Services asynchrones : lecture, écriture et gestion des erreurs",
     ],
     presenterNote:
-      "Montrer Authentication → Realtime Database, puis authService.js et les fonctions addBookToLibrary et getUserLibrary.",
+      "Expliquer Authentication et l'UID ; illustrer la persistance avec addBookToLibrary dans libraryService.js.",
     criteria: ["07"],
   },
   {
@@ -194,13 +194,13 @@ export const presentationData = [
     title: "Tests & déploiement",
     subtitle: "Vérifier et publier l'application",
     points: [
-      "Vitest : 262 tests réussis dans 28 fichiers au 11 octobre 2026",
-      "0 test échoué et aucun warning React act(...) dans la dernière exécution",
-      "Oxlint réussi (warnings préexistants) et build Vite réussi",
+      "Vitest : tests automatisés pour vérifier les fonctionnalités",
+      "Résultats de tests : examiner les échecs et les warnings React act(...)",
+      "Oxlint et build Vite : vérifier le code et la compilation",
       "GitHub Actions et Firebase Hosting : déploiement automatisé",
     ],
     presenterNote:
-      "Montrer les résultats Vitest à jour, le lint, le build Vite, une exécution GitHub Actions réussie et le site publié.",
+      "Résumer tests, lint et build ; montrer un workflow GitHub Actions, puis le site lors de la démo.",
     criteria: ["08"],
   },
   {
@@ -214,7 +214,7 @@ export const presentationData = [
     description:
       "Tableau de bord, recherche, fiche livre, bibliothèque, statuts, collections et paramètres.",
     presenterNote:
-      "Ouvrir Dear Pages avec le compte de démonstration et suivre le parcours prévu dans le script oral.",
+      "Ouvrir le compte de démonstration ; suivre le parcours affiché.",
     links: [
       {
         label: "Ouvrir Dear Pages",
@@ -246,7 +246,7 @@ export const presentationData = [
       "Recherche multilingue et traduction des résumés à la demande",
     ],
     presenterNote:
-      "Présenter les trois difficultés principales : couvertures, cohérence des données et langues des livres. Insister sur les compromis.",
+      "Résumer les solutions et compromis : couvertures, données Firebase, recherche multilingue et traduction.",
     criteria: ["10"],
   },
   {
@@ -264,7 +264,7 @@ export const presentationData = [
       "Perspectives : éditions adaptées et fonctionnalités sociales",
     ],
     presenterNote:
-      "Conclure sur les apprentissages, le résultat et les évolutions possibles. Remercier le jury et laisser cette slide affichée.",
+      "Conclure : apprentissages, application publiée, perspectives. Remercier le jury.",
     criteria: ["09", "10"],
   },
 ];
